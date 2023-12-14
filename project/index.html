@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* margin-left: 500px; */
+            /* padding: 5px; */
+            background-color: aqua;
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .dataDiv {
+            padding: 5px;
+            margin: 12px;
+            background-color: rgb(251, 247, 247);
+        }
+
+        .delete-btn {
+            height: 50px;
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .edit-btn {
+            background-color: rgb(92, 76, 76);
+            color: white;
+            padding: 5px;
+            /* Combine padding properties into a single 'padding' property */
+            margin: 2px;
+            width: 40px;
+            margin-left: 120px;
+
+            border: 2px solid black;
+            display: inline-block;
+            /* Add this property to ensure proper width behavior */
+            text-align: center;
+            /* Center text horizontally */
+            text-decoration: none;
+            /* Remove underline for anchor tags */
+        }
+
+
+        .delete-btn {
+            background-color: rgb(153, 91, 91);
+            height: 31px;
+            width: 55px;
+            color: white;
+            /* padding: 10px; */
+        }
+
+        #userData {
+
+            width: 412px;
+            background-color: white;
+            color: black;
+            margin: auto;
+            min-height: 120px;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .name {
+
+            /* background-color: rgb(226, 221, 221); */
+            color: black;
+            height: 25px;
+            /* text-align: ; */
+            /* padding: 10px; */
+            display: inline;
+            font-style: normal;
+            font-size: medium;
+            font-weight: 300;
+            padding-right: 15px;
+            margin-bottom: 55px;
+            margin-top: 12px;
+            /* border: 2px solid black; */
+
+
+        }
+
+        .link {
+
+            display: inline;
+        }
+
+        .main-div {
+
+            height: 30px;
+            margin: 9px;
+            background-color: rgb(209, 202, 216);
+            padding: 10px;
+            display: inline-block;
+
+            margin: auto;
+            width: 400px;
+            display: block;
+
+
+        }
+
+
+        #h1 {
+
+            margin-left: 470px;
+        }
+        .name-div{
+            /* border: 2px solid black; */
+            margin: 12px;
+            background-color: rgb(203, 196, 196);
+            padding: 5px;
+
+        }
+        #new-list{
+            height: 25px;
+        }
+        #Add-information{
+            height: 35px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="h1">My TODO APP </h1>
+    <!-- <a href="addData.html">Go to addData Page</a> -->
+    <br>
+    <!-- <a href="updatedata.html">Go to Update data</a> -->
+
+    <div class="main-div">
+        <form action="http://localhost:3000/userdata" method="post">
+            <input type="text" name="name" id="new-list" placeholder="Enter New List" required>
+            <button id="Add-information">Add Information</button>
+        </form>
+    </div>
+
+
+    <div id="userData">
+
+
+        // <p>Phone: ${user.phone}</p>
+        // <p>Email: ${user.email}</p>
+    </div>
+
+
+    <script>
+        async function getData() {
+            const data = await fetch("http://localhost:3000/userdata", {
+                method: "GET"
+            });
+
+            const userData = await data.json();
+            // console.log(userData);
+            displayUserData(userData);
+
+        }
+
+        getData();
+
+        //desplay data
+        function displayUserData(userData) {
+            const userDataContainer = document.getElementById("userData");
+            // if(bool){
+
+
+
+            // Clear previous data
+            userDataContainer.innerHTML = "";
+
+            // Create and append elements for each user
+            userData.forEach(user => {
+                const userElement = document.createElement("div");
+                // userElement.className = "dataDiv";
+                userElement.innerHTML = `
+                <div class="name-div">
+                    <p class="name"> ${user.name}</p>
+                    <a href="updatedata.html?userId=${user.idstudent}" class="edit-btn">Edit</a>
+                    <button class="delete-btn" onclick="deleteUser('${user.idstudent}') ">Delete</button>
+
+                </div>
+
+                `;
+
+                userDataContainer.appendChild(userElement);
+            });
+
+            //  else{
+            //     const userDataContainer = document.getElementById("userData");
+
+            //     async  function editProfile(userId) {
+            //     bool=false;
+            //     displayUserData();
+
+            // // const data = await fetch("http://localhost:3000/userdata",)
+            // //    method:"Update"
+            // //     console.log(`Edit profile for user with ID: ${userId}`);
+
+
+            //     // userDataContainer.innerHTML = `
+
+            //     // }
+
+
+
+
+            // }
+
+
+
+        }
+
+
+        //     function updateData(id){
+        //         window.location.href = `updatedata.html/${id}`;
+
+
+
+        //   }
+        // function to edit user
+
+
+        // function to edit user 
+
+        async function deleteUser(userId) {
+            await await fetch(`http://localhost:3000/userdata/${userId}`, {
+                method: "delete"
+            })
+            location.reload();
+
+        }
+    </script>
+</body>
+
+</html>
