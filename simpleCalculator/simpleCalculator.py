@@ -9,7 +9,7 @@ print("4. Division")
 print("5. Exit")
 
 userOperator = int(input("Enter your choice (1-5): "))
-
+value =0
 if userOperator == 5:
     print("Exiting the calculator")
 elif 1 <= userOperator <= 4:
@@ -40,12 +40,3 @@ if(value<0):
 
     else:
         print("Invalid Input")
-if 'value' in locals():
-    print(f"Your result is {value}")
-
-    if value < 0:
-        suggestion = input("If you want to print the absolute value, press 'y', otherwise press 'n': ")
-        if suggestion.lower() == 'y':
-            print(abs(value))
-        else:
-            print(value)
