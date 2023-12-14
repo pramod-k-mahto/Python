@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Data</title>
+</head>
+<style>
+  h1{
+    text-align: center;
+  }
+    #form{
+
+        background-color: rgb(172, 162, 162);
+        height: 40px;
+        width: 300px;
+        margin: auto;
+        text-align: center;
+        padding: 9px;
+    }
+    #name{
+
+        height: 30px;
+        display: inline-block;
+        background-color: white;
+        border: 2px solid black;
+
+    }
+    #Update{
+        height: 30px;
+        /* display: inline-block; */
+        background-color: rgb(40, 33, 33)(169, 149, 149);
+        border: 2px solid black;
+
+    }
+    #goback{
+
+        text-decoration: none;
+        border: 1px solid black;
+    }
+</style>
+<body>
+
+    <h1>TODO Update </h1>
+    <a href="index.html" id="goback">Go Back</a>
+
+    <div id="main-div">
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var currentUrl = window.location.href;
+            var idRegex = /(?:\?|&)userId=(\d+)/;
+            var match = currentUrl.match(idRegex);
+            var userId = match ? match[1] : null;
+
+            console.log(userId);
+            console.log(match);
+            console.log(currentUrl);
+            myupdate(userId);
+        });
+
+        function myupdate(userId) {
+            console.log(userId +"from")
+            const id = document.getElementById("main-div");
+
+            id.innerHTML = `
+                <form id="form" action="http://localhost:3000/about/MyUpdate/${userId}" method="POST">
+
+                    <input type="text" name="name" id="name" placeholder="Enter New List" required>
+                    <button type="submit" id="Update">Update</button>
+                </form>
+            `;
+
+        }
+    </script>
+</body>
+</html>
+<!-- // <input type="hidden" name="userId" value="${userId}"> -->
+                    <!-- Hidden input field for userId -->
